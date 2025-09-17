@@ -9,7 +9,7 @@
 <body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 via-white to-emerald-100 font-sans text-gray-800 p-6">
   
   <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
-    <h1 class="text-2xl font-bold text-emerald-700 mb-6 text-center">CRUDero Update Records</h1>
+    <h1 class="text-2xl font-bold text-emerald-700 mb-6 text-center">Update Records</h1>
     
     <form action="<?=site_url('users/update/'.$user['id']);?>" method="post" class="space-y-5">
       
