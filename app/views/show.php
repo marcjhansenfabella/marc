@@ -137,5 +137,14 @@
 
   <a href="<?=site_url('users/create');?>" class="btn-create">Create Record</a>
 
+  <div class="pagination">
+    <?php for($i = 1; $i <= $total_pages; $i++): ?>
+        <a href="?page=<?= $i ?>" 
+           class="<?= ($i == $current_page) ? 'active' : '' ?>">
+           <?= $i ?>
+        </a>
+    <?php endfor; ?>
+</div>
+
 </body>
 </html>
