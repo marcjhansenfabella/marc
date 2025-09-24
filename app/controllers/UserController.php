@@ -68,19 +68,4 @@ class UserController extends Controller {
             echo 'Something went wrong';
         }
     }
-
-    public function page() {
-    $limit = 5; // how many records per page
-    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-    $offset = ($page - 1) * $limit;
-
-    $data['users'] = $this->UserModel->getPaginated($limit, $offset);
-    $totalUsers = $this->UserModel->countAllUsers();
-
-    $data['total_pages'] = ceil($totalUsers / $limit);
-    $data['current_page'] = $page;
-
-    $this->call->view('show', $data);
-}
-
-}    
+}   

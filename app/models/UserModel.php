@@ -14,16 +14,4 @@ class UserModel extends Model {
     {
         parent::__construct();
     }
-
-     public function getPaginated($limit, $offset) {
-        return $this->db->table($this->table)
-                        ->limit($limit, $offset)
-                        ->get()
-                        ->result_array();
-    }
-
-    
-    public function countAllUsers() {
-        return $this->db->table($this->table)->count_all_results();
-    }
 }
