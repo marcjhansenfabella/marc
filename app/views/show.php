@@ -1,141 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Show</title>
-  <style>
-    body {
-      background: #f9fafb;
-      color: #1f2937;
-      font-family: "Inter", Arial, sans-serif;
-      padding: 40px;
-      text-align: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Data Grid | System Console</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        :root {
+            --color-bg-primary: #0a0a0a;
+            --color-bg-secondary: rgba(18, 18, 18, 0.7);
+            --color-text-primary: #f0f0f0;
+            --color-accent-neon: #00ff80;
+            --color-accent-pink: #ff3366;
+            --color-border: #333;
+            --color-input-bg: #181818;
+            --color-table-header-bg: #1e1e1e;
+            --color-table-row-hover: #1e1e1e;
+            --font-display: 'Orbitron', sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+            --shadow-neon: 0 0 10px rgba(0, 255, 128, 0.5);
+            --shadow-neon-pink: 0 0 10px rgba(255, 51, 102, 0.5);
+        }
 
-    h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #4338ca;
-      margin-bottom: 30px;
-    }
+        body {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            font-family: var(--font-mono);
+            margin: 0;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-image:
+                linear-gradient(to right, rgba(0, 255, 128, 0.07) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 255, 128, 0.07) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
 
-    .table-container {
-      overflow-x: auto;
-    }
+        @keyframes fadeSlideUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
 
-    table {
-      width: 90%;
-      margin: 0 auto;
-      border-collapse: collapse;
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 2rem;
+            background: var(--color-bg-secondary);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-neon);
+            padding: 2.5rem;
+            border-radius: 12px;
+            position: relative;
+            animation: fadeSlideUp 1s ease forwards;
+        }
 
-    thead {
-      background: #4f46e5;
-      color: white;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-    }
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--color-accent-neon);
+            text-shadow: var(--shadow-neon);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
 
-    th, td {
-      padding: 14px 18px;
-      text-align: left;
-    }
+        /* Search */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            width: 100%;
+            animation: fadeSlideUp 1s ease forwards;
+            animation-delay: 0.2s;
+            opacity: 0;
+        }
 
-    tbody tr:nth-child(even) {
-      background: #f3f4f6;
-    }
+        .search-container form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            width: 100%;
+            align-items: center;
+        }
 
-    tbody tr:hover {
-      background: #eef2ff;
-      transition: 0.3s;
-    }
+        #searchBox {
+            flex: 1;
+            padding: 0.7rem 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--color-border);
+            background: var(--color-input-bg);
+            color: var(--color-text-primary);
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
 
-    .btn {
-      display: inline-block;
-      padding: 6px 14px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      border-radius: 6px;
-      text-decoration: none;
-      color: white;
-      transition: background 0.3s;
-    }
+        #searchBox:focus {
+            outline: none;
+            border-color: var(--color-accent-neon);
+            box-shadow: 0 0 5px var(--color-accent-neon);
+        }
 
-    .btn-update {
-      background: #10b981;
-    }
+        .search-btn {
+            padding: 0.7rem 1.2rem;
+            border: 2px solid var(--color-accent-neon);
+            background: transparent;
+            color: var(--color-accent-neon);
+            font-family: var(--font-display);
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 6px;
+            cursor: pointer;
+            text-shadow: 0 0 5px var(--color-accent-neon);
+            box-shadow: 0 0 10px rgba(0, 255, 128, 0.4);
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .btn-update:hover {
-      background: #059669;
-    }
+        .search-btn:hover {
+            background-color: var(--color-accent-neon);
+            color: var(--color-bg-primary);
+            box-shadow: 0 0 20px var(--color-accent-neon);
+        }
 
-    .btn-delete {
-      background: #ef4444;
-    }
+        /* Table */
+        .table-responsive { width: 100%; overflow-x: auto; }
+        table { width: 100%; min-width: 600px; border-collapse: collapse; text-align: left; font-size: 0.95rem; border-radius: 8px; }
+        th, td { padding: 1rem; border-bottom: 1px solid var(--color-border); }
+        thead { background-color: var(--color-table-header-bg); }
+        th { font-weight: 700; color: var(--color-accent-neon); text-transform: uppercase; }
+        tbody tr:hover { background-color: var(--color-table-row-hover); box-shadow: inset 2px 0 0 0 var(--color-accent-neon); }
 
-    .btn-delete:hover {
-      background: #dc2626;
-    }
+        .action-links a {
+            text-decoration: none;
+            color: var(--color-accent-neon);
+            font-weight: 700;
+            padding: 0.25rem 0.5rem;
+            border: 1px solid transparent;
+            transition: all 0.2s ease-in-out;
+        }
+        .action-links a:hover { border-color: var(--color-accent-neon); box-shadow: 0 0 5px var(--color-accent-neon); }
+        .action-links a.delete-link { color: var(--color-accent-pink); }
+        .action-links a.delete-link:hover { border-color: var(--color-accent-pink); box-shadow: var(--shadow-neon-pink); }
 
-    .btn-create {
-      margin-top: 30px;
-      background: #4f46e5;
-      padding: 12px 28px;
-      font-size: 1rem;
-      font-weight: 600;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: background 0.3s, transform 0.2s;
-      text-decoration: none;
-      color: white;
-      display: inline-block;
-    }
+        /* Create button */
+        .create-record-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.75rem 1.5rem;
+            background-color: transparent;
+            color: var(--color-accent-neon);
+            text-decoration: none;
+            border: 2px solid var(--color-accent-neon);
+            border-radius: 8px;
+            font-weight: 700;
+            font-family: var(--font-display);
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            text-shadow: 0 0 5px var(--color-accent-neon);
+            box-shadow: 0 0 10px rgba(0, 255, 128, 0.4);
+            text-transform: uppercase;
+        }
+        .create-record-btn:hover { background-color: var(--color-accent-neon); color: var(--color-bg-primary); box-shadow: 0 0 20px var(--color-accent-neon); }
 
-    .btn-create:hover {
-      background: #4338ca;
-      transform: translateY(-2px);
-    }
-  </style>
+        /* Pagination */
+        .pagination-container {
+            margin-top: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .pagination-container a,
+        .pagination-container strong {
+            display: inline-block;
+            padding: 0.6rem 1rem;
+            border: 2px solid var(--color-accent-neon);
+            background: transparent;
+            color: var(--color-accent-neon);
+            font-family: var(--font-display);
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 6px;
+            text-decoration: none;
+            text-shadow: 0 0 5px var(--color-accent-neon);
+            box-shadow: 0 0 10px rgba(0, 255, 128, 0.4);
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .pagination-container a:hover { background-color: var(--color-accent-neon); color: var(--color-bg-primary); box-shadow: 0 0 20px var(--color-accent-neon); }
+        .pagination-container strong { background-color: var(--color-accent-neon); color: var(--color-bg-primary); box-shadow: 0 0 20px var(--color-accent-neon); cursor: default; }
+
+        /* Responsive: keep buttons inline, just smaller */
+        @media (max-width: 768px) {
+            .pagination-container a,
+            .pagination-container strong { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
+        }
+        @media (max-width: 480px) {
+            .pagination-container a,
+            .pagination-container strong { padding: 0.35rem 0.7rem; font-size: 0.8rem; }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>User Data Grid // Access Terminal</h1>
 
-  <h1>Welcome to Student List</h1>
+        <div class="search-container">
+            <form action="<?= site_url('users/show'); ?>" method="get">
+                <?php $q = isset($_GET['q']) ? $_GET['q'] : ''; ?>
+                <input type="text" name="q" placeholder="Search records..." value="<?= html_escape($q); ?>" id="searchBox">
+                <button type="submit" class="search-btn">Search</button>
+            </form>
+        </div>
 
-  <div class="table-container">
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Last Name</th>
-          <th>First Name</th>
-          <th>Email</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach (html_escape($users) as $user):?>
-        <tr>
-          <td><?=$user['id'];?></td>
-          <td><?=$user['last_name'];?></td>
-          <td><?=$user['first_name'];?></td>
-          <td><?=$user['email'];?></td>
-          <td>
-            <a href="<?=site_url('users/update/'.$user['id']);?>" class="btn btn-update">Update</a>
-            <a href="<?=site_url('users/delete/'.$user['id']);?>" class="btn btn-delete">Delete</a>
-          </td>
-        </tr>
-        <?php endforeach;?>
-      </tbody>
-    </table>
-  </div>
+        <div class="table-responsive">
+            <table id="studentsTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach (html_escape($users) as $user): ?>
+                        <tr>
+                            <td><?= $user['id']; ?></td>
+                            <td><?= $user['last_name']; ?></td>
+                            <td><?= $user['first_name']; ?></td>
+                            <td><?= $user['email']; ?></td>
+                            <td class="action-links">
+                                <a href="<?= site_url('users/update/'.$user['id']); ?>">Update</a> |
+                                <a href="<?= site_url('users/delete/'.$user['id']); ?>" class="delete-link" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
 
-  <a href="<?=site_url('users/create');?>" class="btn-create">Create Record</a>
+        <!-- Pagination links -->
+        <div class="pagination-container">
+            <?php if (isset($page)) echo $page; ?>
+        </div>
 
+        <div style="text-align: center;">
+            <a href="<?= site_url('users/create'); ?>" class="create-record-btn">Create New Record</a>
+        </div>
+    </div>
 </body>
 </html>
