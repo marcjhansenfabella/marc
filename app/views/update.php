@@ -1,204 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update User | System Console</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --color-bg-primary: #0a0a0a;
-            --color-bg-secondary: rgba(18, 18, 18, 0.7);
-            --color-text-primary: #f0f0f0;
-            --color-accent-neon: #00ff80;
-            --color-danger-neon: #ff3366;
-            --color-border: #333;
-            --color-input-bg: #2d2d2d;
-            --font-display: 'Orbitron', sans-serif;
-            --font-mono: 'Roboto Mono', monospace;
-            --shadow-neon: 0 0 10px rgba(0, 255, 128, 0.5);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update User | System Console</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9fafb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-        body {
-            background-color: var(--color-bg-primary);
-            color: var(--color-text-primary);
-            font-family: var(--font-mono);
-            margin: 0;
-            padding: 2rem 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-image:
-                linear-gradient(to right, rgba(0, 255, 128, 0.07) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 255, 128, 0.07) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
+    .form-container {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 100%;
+      max-width: 380px; /* narrower box */
+    }
 
-        /* Animation */
-        @keyframes fadeSlideUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: #111827;
+    }
 
-        .form-container {
-            width: 90%;
-            max-width: 500px;
-            background: var(--color-bg-secondary);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--color-border);
-            box-shadow: var(--shadow-neon);
-            padding: 2.5rem;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            animation: fadeSlideUp 1s ease forwards;
-        }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center; /* center form fields */
+    }
 
-        h1 {
-            font-family: var(--font-display);
-            font-size: clamp(1.5rem, 5vw, 2.2rem);
-            font-weight: 700;
-            margin-bottom: 2.5rem;
-            color: var(--color-accent-neon);
-            text-shadow: var(--shadow-neon);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 0;
-            animation: fadeSlideUp 1s ease forwards;
-            animation-delay: 0.2s;
-        }
+    .form-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* left align label */
+}
 
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            width: 100%;
-        }
+label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #374151;
+  text-align: left;
+  margin-left: 10%; /* aligns with input since inputs are centered at 80% width */
+}
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-            opacity: 0;
-            animation: fadeSlideUp 0.8s ease forwards;
-        }
+input[type="text"],
+input[type="email"] {
+  width: 80%; /* keep the same input length */
+  padding: 0.7rem 0.8rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #111827;
+  background: #f9fafb;
+  transition: border-color 0.2s ease;
+  margin: 0 auto; /* keep centered */
+  display: block;
+}
 
-        .form-group:nth-child(1) { animation-delay: 0.4s; }
-        .form-group:nth-child(2) { animation-delay: 0.6s; }
-        .form-group:nth-child(3) { animation-delay: 0.8s; }
+    input:focus {
+      border-color: #6366f1;
+      outline: none;
+      background: #ffffff;
+    }
 
-        label {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--color-accent-neon);
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+    button[type="submit"] {
+      margin-top: 1rem;
+      width: 80%; /* smaller button */
+      padding: 0.9rem 0;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      background: linear-gradient(90deg, #06b6d4, #9333ea);
+      transition: opacity 0.3s ease;
+    }
 
-        input[type="text"],
-        input[type="email"] {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            background-color: var(--color-input-bg);
-            border: 1px solid var(--color-border);
-            border-radius: 6px;
-            color: var(--color-text-primary);
-            font-family: var(--font-mono);
-            font-size: 1rem;
-            box-sizing: border-box;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
+    button[type="submit"]:hover {
+      opacity: 0.9;
+    }
 
-        input[type="text"]:focus,
-        input[type="email"]:focus {
-            outline: none;
-            border-color: var(--color-accent-neon);
-            box-shadow: 0 0 5px var(--color-accent-neon);
-        }
+    .back-link {
+      display: inline-block;
+      margin-top: 1rem;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #374151;
+      transition: color 0.2s ease;
+    }
 
-        button[type="submit"] {
-            width: 100%;
-            padding: 1rem 0;
-            background-color: transparent;
-            color: var(--color-accent-neon);
-            border: 2px solid var(--color-accent-neon);
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            font-family: var(--font-display);
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-            text-shadow: 0 0 5px var(--color-accent-neon);
-            box-shadow: 0 0 10px rgba(0, 255, 128, 0.4);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-top: 1rem;
-            opacity: 0;
-            animation: fadeSlideUp 0.8s ease forwards;
-            animation-delay: 1s;
-        }
-
-        button[type="submit"]:hover {
-            background-color: var(--color-accent-neon);
-            color: var(--color-bg-primary);
-            box-shadow: 0 0 20px var(--color-accent-neon);
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-top: 2rem;
-            text-decoration: none;
-            color: var(--color-text-primary);
-            font-size: 0.9rem;
-            font-weight: 400;
-            transition: color 0.2s ease;
-            border: 1px solid transparent;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            opacity: 0;
-            animation: fadeSlideUp 0.8s ease forwards;
-            animation-delay: 1.2s;
-        }
-
-        .back-link:hover {
-            color: var(--color-accent-neon);
-            border-color: var(--color-accent-neon);
-            box-shadow: 0 0 5px var(--color-accent-neon);
-        }
-    </style>
+    .back-link:hover {
+      color: #9333ea;
+    }
+  </style>
 </head>
 <body>
-    <div class="form-container">
-        <h1>// UPDATE USER_REC</h1>
-        <form action="<?=site_url('users/update/'.$user['id']);?>" method="post">
-            <div class="form-group">
-                <label for="last_name">Last Name</label>
-                <input type="text" id="last_name" name="last_name" value="<?=html_escape($user['last_name']);?>" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="first_name">First Name</label>
-                <input type="text" id="first_name" name="first_name" value="<?=html_escape($user['first_name']);?>" required>
-            </div>
+  <div class="form-container">
+    <h1>Update User</h1>
+    <form action="<?=site_url('users/update/'.$user['id']);?>" method="post">
+      <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input type="text" id="last_name" name="last_name" value="<?=html_escape($user['last_name']);?>" required>
+      </div>
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="<?=html_escape($user['email']);?>" required>
-            </div>
+      <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input type="text" id="first_name" name="first_name" value="<?=html_escape($user['first_name']);?>" required>
+      </div>
 
-            <button type="submit">Update Record</button>
-        </form>
-        <a href="<?=site_url('users/show');?>" class="back-link">// Back to Dashboard</a>
-    </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" value="<?=html_escape($user['email']);?>" required>
+      </div>
+
+      <button type="submit">Update Record</button>
+    </form>
+    <a href="<?=site_url('users/show');?>" class="back-link">← Back to Dashboard</a>
+  </div>
 </body>
 </html>

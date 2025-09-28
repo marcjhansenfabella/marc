@@ -7,208 +7,167 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        :root {
-            --color-bg-primary: #0a0a0a;
-            --color-bg-secondary: rgba(18, 18, 18, 0.7);
-            --color-text-primary: #f0f0f0;
-            --color-accent-neon: #00ff80;
-            --color-accent-pink: #ff3366;
-            --color-border: #333;
-            --color-input-bg: #181818;
-            --color-table-header-bg: #1e1e1e;
-            --color-table-row-hover: #1e1e1e;
-            --font-display: 'Orbitron', sans-serif;
-            --font-mono: 'Roboto Mono', monospace;
-            --shadow-neon: 0 0 10px rgba(0, 255, 128, 0.5);
-            --shadow-neon-pink: 0 0 10px rgba(255, 51, 102, 0.5);
-        }
+/* Body background & centering */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background: #f9fafb;
+  font-family: 'Roboto Mono', monospace;
+  margin: 0;
+  padding: 2rem;
+}
 
-        body {
-            background-color: var(--color-bg-primary);
-            color: var(--color-text-primary);
-            font-family: var(--font-mono);
-            margin: 0;
-            padding: 2rem 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            background-image:
-                linear-gradient(to right, rgba(0, 255, 128, 0.07) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 255, 128, 0.07) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
+/* Card container */
+.container {
+  width: 100%;
+  max-width: 1000px;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  text-align: center;
+}
 
-        @keyframes fadeSlideUp {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+/* Title */
+.container h1 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin-top: 2rem;
-            background: var(--color-bg-secondary);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--color-border);
-            box-shadow: var(--shadow-neon);
-            padding: 2.5rem;
-            border-radius: 12px;
-            position: relative;
-            animation: fadeSlideUp 1s ease forwards;
-        }
+/* Search box styling */
+.search-container {
+  margin-bottom: 1rem;
+  text-align: right;
+}
 
-        h1 {
-            font-family: var(--font-display);
-            font-size: clamp(1.5rem, 5vw, 2.5rem);
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--color-accent-neon);
-            text-shadow: var(--shadow-neon);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+.search-container input {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  font-size: 0.9rem;
+}
 
-        /* Search */
-        .search-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            width: 100%;
-            animation: fadeSlideUp 1s ease forwards;
-            animation-delay: 0.2s;
-            opacity: 0;
-        }
+.search-container button {
+  margin-left: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #06b6d4, #9333ea);
+  color: #fff;
+  font-weight: 600;
+}
 
-        .search-container form {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            width: 100%;
-            align-items: center;
-        }
+/* Table styling */
+.table-responsive {
+  margin-top: 1rem;
+  overflow-x: auto;
+}
 
-        #searchBox {
-            flex: 1;
-            padding: 0.7rem 1rem;
-            border-radius: 6px;
-            border: 1px solid var(--color-border);
-            background: var(--color-input-bg);
-            color: var(--color-text-primary);
-            font-family: var(--font-mono);
-            font-size: 1rem;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
+#studentsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
 
-        #searchBox:focus {
-            outline: none;
-            border-color: var(--color-accent-neon);
-            box-shadow: 0 0 5px var(--color-accent-neon);
-        }
+#studentsTable th,
+#studentsTable td {
+  border: 1px solid #e5e7eb;
+  padding: 0.75rem;
+  text-align: center;
+}
 
-        .search-btn {
-            padding: 0.7rem 1.2rem;
-            border: 2px solid var(--color-accent-neon);
-            background: transparent;
-            color: var(--color-accent-neon);
-            font-family: var(--font-display);
-            font-weight: 700;
-            text-transform: uppercase;
-            border-radius: 6px;
-            cursor: pointer;
-            text-shadow: 0 0 5px var(--color-accent-neon);
-            box-shadow: 0 0 10px rgba(0, 255, 128, 0.4);
-            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-        }
+#studentsTable th {
+  background: #f3f4f6;
+  font-weight: 700;
+  text-transform: uppercase;
+}
 
-        .search-btn:hover {
-            background-color: var(--color-accent-neon);
-            color: var(--color-bg-primary);
-            box-shadow: 0 0 20px var(--color-accent-neon);
-        }
+#studentsTable tr:nth-child(even) {
+  background: #f9fafb;
+}
 
-        /* Table */
-        .table-responsive { width: 100%; overflow-x: auto; }
-        table { width: 100%; min-width: 600px; border-collapse: collapse; text-align: left; font-size: 0.95rem; border-radius: 8px; }
-        th, td { padding: 1rem; border-bottom: 1px solid var(--color-border); }
-        thead { background-color: var(--color-table-header-bg); }
-        th { font-weight: 700; color: var(--color-accent-neon); text-transform: uppercase; }
-        tbody tr:hover { background-color: var(--color-table-row-hover); box-shadow: inset 2px 0 0 0 var(--color-accent-neon); }
+/* Action buttons */
+.action-links a {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  margin: 0 0.25rem;
+  transition: all 0.2s ease;
+}
 
-        .action-links a {
-            text-decoration: none;
-            color: var(--color-accent-neon);
-            font-weight: 700;
-            padding: 0.25rem 0.5rem;
-            border: 1px solid transparent;
-            transition: all 0.2s ease-in-out;
-        }
-        .action-links a:hover { border-color: var(--color-accent-neon); box-shadow: 0 0 5px var(--color-accent-neon); }
-        .action-links a.delete-link { color: var(--color-accent-pink); }
-        .action-links a.delete-link:hover { border-color: var(--color-accent-pink); box-shadow: var(--shadow-neon-pink); }
+.action-links a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.5);
+}
 
-        /* Create button */
-        .create-record-btn {
-            display: inline-block;
-            margin-top: 2rem;
-            padding: 0.75rem 1.5rem;
-            background-color: transparent;
-            color: var(--color-accent-neon);
-            text-decoration: none;
-            border: 2px solid var(--color-accent-neon);
-            border-radius: 8px;
-            font-weight: 700;
-            font-family: var(--font-display);
-            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-            text-shadow: 0 0 5px var(--color-accent-neon);
-            box-shadow: 0 0 10px rgba(0, 255, 128, 0.4);
-            text-transform: uppercase;
-        }
-        .create-record-btn:hover { background-color: var(--color-accent-neon); color: var(--color-bg-primary); box-shadow: 0 0 20px var(--color-accent-neon); }
+.action-links a.delete-link {
+  background: linear-gradient(135deg, #ec4899, #db2777);
+}
 
-        /* Pagination */
-        .pagination-container {
-            margin-top: 20px;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        .pagination-container a,
-        .pagination-container strong {
-            display: inline-block;
-            padding: 0.6rem 1rem;
-            border: 2px solid var(--color-accent-neon);
-            background: transparent;
-            color: var(--color-accent-neon);
-            font-family: var(--font-display);
-            font-weight: 700;
-            text-transform: uppercase;
-            border-radius: 6px;
-            text-decoration: none;
-            text-shadow: 0 0 5px var(--color-accent-neon);
-            box-shadow: 0 0 10px rgba(0, 255, 128, 0.4);
-            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-        }
-        .pagination-container a:hover { background-color: var(--color-accent-neon); color: var(--color-bg-primary); box-shadow: 0 0 20px var(--color-accent-neon); }
-        .pagination-container strong { background-color: var(--color-accent-neon); color: var(--color-bg-primary); box-shadow: 0 0 20px var(--color-accent-neon); cursor: default; }
+.action-links a.delete-link:hover {
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.6);
+}
 
-        /* Responsive: keep buttons inline, just smaller */
-        @media (max-width: 768px) {
-            .pagination-container a,
-            .pagination-container strong { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
-        }
-        @media (max-width: 480px) {
-            .pagination-container a,
-            .pagination-container strong { padding: 0.35rem 0.7rem; font-size: 0.8rem; }
-        }
+/* Pagination */
+.pagination-container {
+  margin-top: 1.5rem;
+}
+
+.pagination-container a,
+.pagination-container strong {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #fff;
+  text-decoration: none;
+  margin: 0 0.25rem;
+  background: linear-gradient(135deg, #06b6d4, #9333ea);
+  box-shadow: 0 3px 10px rgba(147, 51, 234, 0.5);
+  transition: all 0.2s ease;
+}
+
+.pagination-container a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 16px rgba(147, 51, 234, 0.6);
+}
+
+.pagination-container strong {
+  background: linear-gradient(135deg, #9333ea, #06b6d4);
+}
+
+/* Create new record button */
+.create-record-btn {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #08db72ff, #08db79ff, #059669);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.create-record-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 16px rgba(75, 253, 75, 0.5);
+}
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>User Data Grid // Access Terminal</h1>
+        <h1> Student Dashboard </h1>
 
         <div class="search-container">
             <form action="<?= site_url('users/show'); ?>" method="get">

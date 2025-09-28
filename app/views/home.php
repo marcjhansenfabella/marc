@@ -10,10 +10,10 @@
       --color-bg: #f9fafb;
       --color-card: #ffffff;
       --color-text: #1f2937;
-      --color-accent: #2563eb, #8b25ebff, #700174ff ;
-      --color-accent-hover: #1e40af;
+      --color-accent: #2563eb;
+     background: linear-gradient(135deg, #25e5ebff, #2563eb, #9912a5ff, #ad148cff);
       --color-border: #e5e7eb;
-      --radius: 12px;
+      --radius: 999px; /* pill shape */
       --shadow: 0 4px 20px rgba(0,0,0,0.06);
       --font-main: 'Inter', sans-serif;
     }
@@ -35,7 +35,7 @@
       max-width: 480px;
       background: var(--color-card);
       border: 1px solid var(--color-border);
-      border-radius: var(--radius);
+      border-radius: 16px;
       box-shadow: var(--shadow);
       padding: 2.5rem;
       text-align: center;
@@ -46,44 +46,45 @@
       font-weight: 700;
       font-size: clamp(1.5rem, 5vw, 2.2rem);
       margin-bottom: 2rem;
-      color: var(--color-accent);
+      color: var(--color-text);
     }
 
     .btn-group {
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
+      gap: 1rem;
       margin-top: 1.5rem;
-      align-items: center; /* Center buttons horizontally */
+      align-items: center;
     }
 
-    .main-btn {
-      display: block;
-      width: 70%;  /* Reduced width */
-      max-width: 220px; /* Prevents being too wide on big screens */
-      padding: 0.8rem;
-      text-decoration: none;
-      border-radius: var(--radius);
-      font-weight: 600;
-      font-size: 1rem;
-      text-align: center;
-      border: 1px solid var(--color-accent);
-      background-color: var(--color-accent);
-      color: #fff;
-      cursor: pointer;
-      transition: background-color 0.25s ease, transform 0.15s ease, box-shadow 0.2s ease;
-    }
+    
+     .main-btn {
+  display: block;
+  width: 80%;
+  max-width: 260px;
+  padding: 0.9rem 1rem;
+  text-decoration: none;
+  border-radius: var(--radius); /* pill buttons */
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  border: none;
+  background: linear-gradient(135deg, #25e5ebff,  #2563eb, #9912a5ff, #ad148cff); /* gradient */
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
 
-    .main-btn:hover {
-      background-color: var(--color-accent-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
-    }
+.main-btn:hover {
+  background: linear-gradient(135deg, #25e5ebff, #2563eb , #9912a5ff, #ad148cff); /* darker gradient */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+}
 
-    .main-btn:active {
-      transform: scale(0.97);
-      box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3);
-    }
+.main-btn:active {
+  transform: scale(0.97);
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3);
+}
 
     /* Animation */
     @keyframes fadeSlideUp {
@@ -94,7 +95,7 @@
     @media (max-width: 480px) {
       body { padding: 1rem; }
       .container { padding: 2rem 1.5rem; }
-      .main-btn { width: 100%; max-width: none; } /* Full width on small screens */
+      .main-btn { width: 100%; max-width: none; } /* full width on mobile */
     }
   </style>
 </head>
