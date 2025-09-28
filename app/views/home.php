@@ -10,7 +10,7 @@
       --color-bg: #f9fafb;
       --color-card: #ffffff;
       --color-text: #1f2937;
-      --color-accent: #2563eb;
+      --color-accent: #2563eb, #8b25ebff, #700174ff ;
       --color-accent-hover: #1e40af;
       --color-border: #e5e7eb;
       --radius: 12px;
@@ -54,12 +54,14 @@
       flex-direction: column;
       gap: 1.2rem;
       margin-top: 1.5rem;
+      align-items: center; /* Center buttons horizontally */
     }
 
     .main-btn {
       display: block;
-      width: 100%;
-      padding: 0.9rem;
+      width: 70%;  /* Reduced width */
+      max-width: 220px; /* Prevents being too wide on big screens */
+      padding: 0.8rem;
       text-decoration: none;
       border-radius: var(--radius);
       font-weight: 600;
@@ -68,7 +70,7 @@
       border: 1px solid var(--color-accent);
       background-color: var(--color-accent);
       color: #fff;
-      cursor: pointer; /* makes it feel clickable */
+      cursor: pointer;
       transition: background-color 0.25s ease, transform 0.15s ease, box-shadow 0.2s ease;
     }
 
@@ -92,6 +94,7 @@
     @media (max-width: 480px) {
       body { padding: 1rem; }
       .container { padding: 2rem 1.5rem; }
+      .main-btn { width: 100%; max-width: none; } /* Full width on small screens */
     }
   </style>
 </head>
