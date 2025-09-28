@@ -10,7 +10,7 @@
       --color-bg: #f9fafb;
       --color-card: #ffffff;
       --color-text: #1f2937;
-      --color-accent: #2563eb; /* Modern blue */
+      --color-accent: #2563eb;
       --color-accent-hover: #1e40af;
       --color-border: #e5e7eb;
       --radius: 12px;
@@ -64,15 +64,23 @@
       border-radius: var(--radius);
       font-weight: 600;
       font-size: 1rem;
+      text-align: center;
       border: 1px solid var(--color-accent);
       background-color: var(--color-accent);
       color: #fff;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      cursor: pointer; /* makes it feel clickable */
+      transition: background-color 0.25s ease, transform 0.15s ease, box-shadow 0.2s ease;
     }
 
     .main-btn:hover {
       background-color: var(--color-accent-hover);
       transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+    }
+
+    .main-btn:active {
+      transform: scale(0.97);
+      box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3);
     }
 
     /* Animation */
