@@ -167,7 +167,7 @@ body {
 </head>
 <body>
     <div class="container">
-        <h1> Student Dashboard </h1>
+        <h1> Users Dashboard </h1>
 
         <div class="search-container">
             <form action="<?= site_url('users/show'); ?>" method="get">
@@ -211,7 +211,7 @@ body {
         </div>
 
         <div style="text-align: center;">
-            <a href="<?= site_url('users/create'); ?>" class="create-record-btn">Create New Record</a>
+            <a href="<?= site_url('users/create'); ?>" class="create-record-btn">Create New User</a>
         </div>
     </div>
 </body>
